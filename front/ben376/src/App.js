@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { Route, BrowserRouter, Switch, NavLink } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
-import SignUp from './SignUp.js';
 
+import SignUp from './SignUp.js';
+import Home from './Home'
+import History from './History'
 
 class App extends Component {
   render() {
@@ -10,12 +13,19 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Welcome to the Bendo</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <SignUp />
+
+
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/History" component={History} />
+          </Switch>
+        </BrowserRouter>
+        <div>
+          <SignUp />
+        </div>
       </div>
     );
   }
