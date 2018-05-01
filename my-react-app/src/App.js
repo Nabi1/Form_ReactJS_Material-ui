@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import SignUp from './SignUp'
+import SignUp from './Components/SignUp'
 
 class App extends Component {
   render() {
@@ -12,9 +12,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">This is L'Odyssée d'Homer</h1>
         </header>
-        <p className="App-intro">
-         <SignUp/>
-        </p>
+         <SignUp />
       </div>
     );
   }
