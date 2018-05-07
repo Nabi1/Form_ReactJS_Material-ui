@@ -1,0 +1,12 @@
+.signup {
+    width: 60%;
+    margin: 16px auto;
+    border: 3px solid #eee;
+    text-align: center;
+}
+
+.inputs {
+    display: center;
+    width: 50%;
+    margin: 10px auto;
+}
