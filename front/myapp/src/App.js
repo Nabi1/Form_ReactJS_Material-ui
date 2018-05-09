@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import SignUp from './SignUp.js';
-import MyTimer from './MyTimer.js';
+// import MyTimer from './MyTimer.js';
 
 class App extends Component {
   render() {
@@ -13,7 +13,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <SignUp />
-        <MyTimer />
+        {/* <MyTimer /> */}
       </div>
     );
   }
