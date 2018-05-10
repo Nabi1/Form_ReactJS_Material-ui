@@ -4,9 +4,7 @@ class SignUp extends Component {
   constructor(props) {
     super(props);
 /*
-========================
 ======== STATE =========
-========================
 */
     this.state = {
       email : '',
@@ -17,47 +15,43 @@ class SignUp extends Component {
     };
   }
 /*
-==========================
 ======== FONCTIONS =======
-==========================
 */
-  updateEmailField(event) {
+updateEmailField = (event) => {
     this.setState({
       email: event.target.value,
     });
   }
 
- updatePassWordField(event) {
+ updatePassWordField = (event) => {
     this.setState({
       passWord: event.target.value,
     });
   }
 
- updateCheckPassWordField(event) {
+ updateCheckPassWordField = (event) => {
     this.setState({
       checkPassWord: event.target.value,
     });
   }
 
- updateFirstNameField(event) {
+ updateFirstNameField = (event) => {
     this.setState({
       firstName: event.target.value,
     });
   }
-   updateLastNameField(event) {
+   updateLastNameField = (event) => {
     this.setState({
       lastName: event.target.value,
     });
   }
 
-  handleSubmit =(event) => {
+  handleSubmit = (event) => {
     event.preventDefault()
     console.log(JSON.stringify(this.state,1,1))
 }
 /*
-==========================
 ======== RENDER ==========
-==========================
 */
   render() {
     return(
@@ -73,7 +67,7 @@ class SignUp extends Component {
               className="form-control" 
               name="email" 
               placeholder="Email" 
-              onChange= {this.updateEmailField.bind(this)}
+              onChange= {this.updateEmailField}
             />
           </div>
           <div>
@@ -83,7 +77,7 @@ class SignUp extends Component {
             className="form-control" 
             aria-describedby="emailHelp" 
             placeholder="New password" 
-            onChange= {this.updatePassWordField.bind(this)}
+            onChange= {this.updatePassWordField}
            /* onChange={  this.formUpdate }*/
            />
           </div>
@@ -94,7 +88,7 @@ class SignUp extends Component {
               className="form-control" 
               aria-describedby="emailHelp" 
               placeholder="Enter the same password" 
-              onChange= {this.updateCheckPassWordField.bind(this)}
+              onChange= {this.updateCheckPassWordField}
             /* onChange={ this.formUpdate }*/
             />
            </div>
@@ -104,9 +98,9 @@ class SignUp extends Component {
              <input 
               type="text"
               className="form-control" 
-              name="email" 
+              name="firstName" 
               placeholder="Jean" 
-              onChange= {this.updateFirstNameField.bind(this)}
+              onChange= {this.updateFirstNameField}
               />
             </div>
             <div>
@@ -115,9 +109,9 @@ class SignUp extends Component {
               <input 
                 type="text"
                 className="form-control" 
-                name="email" 
+                name="LastName" 
                 placeholder="Dujardin" 
-                onChange= {this.updateLastNameField.bind(this)}
+                onChange= {this.updateLastNameField}
               />
             </div>
             <div>
