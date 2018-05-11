@@ -1,0 +1,53 @@
+Arguments: 
+  /usr/local/Cellar/node/9.11.1/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js start
+
+PATH: 
+  /Users/FannyGaudin/.npm-packages/bin:/usr/local/npm_packages/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Users/FannyGaudin/.npm-packages/bin:/usr/local/npm_packages/bin:/Users/FannyGaudin/bin:/Users/FannyGaudin/bin
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  9.11.1
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+      "name": "serveur",
+      "version": "1.0.0",
+      "description": "serveur de la Wild",
+      "main": "app.js",
+      "scripts": {
+          "start": "node app.js"
+      },
+      "author": "wilder",
+      "dependencies": {
+          "body-parser": "^1.18.2",
+          "express": "^4.16.3",
+          "morgan": "^1.9.0",
+          "mysql": "^2.15.0"
+      }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: Command failed.
+  Exit code: 1
+  Command: sh
+  Arguments: -c node app.js
+  Directory: /Users/FannyGaudin/Documents/Wild Code/quetes/LOdysseyDHomer/back
+  Output:
+  
+      at ProcessTermError.MessageError (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:186:110)
+      at new ProcessTermError (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:226:113)
+      at ChildProcess.<anonymous> (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:30281:17)
+      at ChildProcess.emit (events.js:180:13)
+      at maybeClose (internal/child_process.js:936:16)
+      at Process.ChildProcess._handle.onexit (internal/child_process.js:220:5)
