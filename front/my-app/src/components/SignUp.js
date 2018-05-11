@@ -33,7 +33,7 @@ class SignUp extends Component {
                     <input type="password"  name="password"onChange={this.SwitchPassword.bind(this)}/> 
                     <input type="password"  name="passwordbis" onChange={this.SwitchPasswordbis.bind(this)}/> 
                     <input type="text"  name="name" onChange={this.SwitchName.bind(this)}/> 
-                    <input type="lastname"  name="lastname" onChange={this.SwitchLastname.bind(this)}/>
+                    <input type="text"  name="lastname" onChange={this.SwitchLastname.bind(this)}/>
                     <input type="submit" value="Soumettre"/>
                 </form>
             </div>
