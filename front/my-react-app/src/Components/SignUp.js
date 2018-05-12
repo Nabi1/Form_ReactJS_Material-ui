@@ -8,10 +8,10 @@ class SignUp extends Component {
 */
     this.state = {
       email : '',
-      passWord : '',
+      password : '',
       checkPassWord : '',
-      firstName: '',
-      lastName : '',
+      name: '',
+      lastname : '',
       flash: '',
     };
   }
@@ -27,7 +27,7 @@ updateEmailField = (event) => {
 
  updatePassWordField = (event) => {
     this.setState({
-      passWord: event.target.value,
+      password: event.target.value,
     });
   }
 
@@ -36,17 +36,18 @@ updateEmailField = (event) => {
       checkPassWord: event.target.value,
     });
   }
-
+  
  updateFirstNameField = (event) => {
     this.setState({
-      firstName: event.target.value,
+      name: event.target.value,
     });
   }
    updateLastNameField = (event) => {
     this.setState({
-      lastName: event.target.value,
+      lastname: event.target.value,
     });
   }
+
 
     handleSubmit = (event) => {
         event.preventDefault()
@@ -117,7 +118,7 @@ updateEmailField = (event) => {
              <input 
               type="text"
               className="form-control" 
-              name="firstName" 
+              name="name" 
               placeholder="Jean" 
               onChange= {this.updateFirstNameField}
               />
@@ -128,7 +129,7 @@ updateEmailField = (event) => {
               <input 
                 type="text"
                 className="form-control" 
-                name="LastName" 
+                name="Lastname" 
                 placeholder="Dujardin" 
                 onChange= {this.updateLastNameField}
               />
