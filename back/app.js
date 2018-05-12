@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
-const app = express();
-const server = app.listen(3000);
+const bodyParser = require('body-parser')
+const app = express();;
+const connection = require('./helpers/db.js');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -11,7 +12,8 @@ var authRouter = require('./routes/auth/auth');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // router setup
@@ -26,4 +28,3 @@ app.use(function(req, res, next){
 });
 
 module.exports = app;
-console.log('Server is listening on port 3000');
