@@ -1,12 +1,11 @@
 // CONNEXION BDD
-
+/*
 // Modules
-/*const express = require('express');
+const express = require('express');
 const mysql = require('mysql');
 
 // Mysql connection
 
-function connection () {
   let connection = mysql.createConnection({
     host: "localhost",
     user: "root",

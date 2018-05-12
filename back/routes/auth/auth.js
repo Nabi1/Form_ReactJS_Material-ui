@@ -5,6 +5,7 @@ const router = express.Router();
 /*const connection = require('./helpers/db.js');*/
 
 // mysql connection
+
 let connection = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -20,11 +21,17 @@ router.post('/signup', (req, res, next) => {
   
   connection.query(addData, function(err, rows, fields) {
     if (err) {
-      res.status(500).end();
-    } else {
-      res.send('Your database has been uploaded ! Well done Neo');
-    }
-  });
+      res.status(500).json({
+          flash: err.message
+      });
+
+  } else {
+      res.status(200).json({
+          flash: "You are a boss !"
+      });
+      res.end()
+  }
+});
 });
 
 module.exports = router;

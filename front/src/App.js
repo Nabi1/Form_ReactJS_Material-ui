@@ -8,6 +8,8 @@ import Home from './Home'
 import History from './History'
 
 class App extends Component {
+
+//Render the app
   render() {
     return (
       <div className="App">
