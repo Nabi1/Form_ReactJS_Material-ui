@@ -3,16 +3,17 @@ const router = express.Router();
 const connection = require("../../helpers/db.js");
 
 router.post("/signup", (req, res, next) => {
-    let values = {
-        email: req.body.email,
-        password: req.body.password,
-        name: req.body.name,
-        lastname: req.body.lastname
-    };
-    let user = `INSERT INTO users (email, password, name, lastname)
-  VALUES (${values});`;
+    let values = [
+        req.body.email,
+        req.body.password,
+        req.body.name,
+        req.body.lastname
+    ];
 
-    connection.query(user, function(err, rows, fields) {
+    let user = `INSERT INTO users (email, password, name, lastname)
+  VALUES (?,?,?,?);`;
+
+    connection.query(user, values, function(err, rows, fields) {
         if (err) {
             res.status(500).end();
         } else {
