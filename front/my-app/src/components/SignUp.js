@@ -30,7 +30,7 @@ class SignUp extends Component {
                 <h1>{JSON.stringify(this.state,1,1)}</h1>
                 <form onSubmit={this.handleSubmit}>
                     <input type="email"  name="email" onChange={this.SwitchEmail.bind(this)}/> 
-                    <input type="password"  name="password"onChange={this.SwitchPassword.bind(this)}/> 
+                    <input type="password"  name="password" onChange={this.SwitchPassword.bind(this)}/> 
                     <input type="password"  name="passwordbis" onChange={this.SwitchPasswordbis.bind(this)}/> 
                     <input type="text"  name="name" onChange={this.SwitchName.bind(this)}/> 
                     <input type="text"  name="lastname" onChange={this.SwitchLastname.bind(this)}/>

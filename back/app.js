@@ -18,10 +18,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/auth', authRouter);
 
-app.get('/', function (req, res) {
-  res.send('you!')
-})
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -40,10 +36,11 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
-
-
 // port listen
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
+
+module.exports = app;
+
+
