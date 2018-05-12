@@ -20,6 +20,7 @@ router.post('/signup', (req, res, next) => {
             res.status(200).json({
                 flash: "User has been signed up !"
             });
+            res.end()
         }
     });
 });
