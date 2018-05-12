@@ -11,12 +11,14 @@ class SignUp extends Component {
       passWord : '',
       checkPassWord : '',
       firstName: '',
-      lastName : ''
+      lastName : '',
+      flash: '',
     };
   }
 /*
 ======== FONCTIONS =======
 */
+
 updateEmailField = (event) => {
     this.setState({
       email: event.target.value,
@@ -46,10 +48,27 @@ updateEmailField = (event) => {
     });
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault()
-    console.log(JSON.stringify(this.state,1,1))
-}
+    handleSubmit = (event) => {
+        event.preventDefault()
+        console.log(JSON.stringify(this.state, 1, 1))
+        fetch("/auth/signup", {
+                method: 'POST',
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                }),
+                body: JSON.stringify(this.state),
+            })
+            .then(res => res.json())
+            .then(
+                res => this.setState({
+                    "flash": res.flash
+                }),
+                err => this.setState({
+                    "flash": err.flash
+                })
+            )
+
+    }
 /*
 ======== RENDER ==========
 */
