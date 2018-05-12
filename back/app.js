@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const logger = require('morgan');
 let mysql = require('mysql');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 const bodyParser = require('body-parser');
 
 // Init mes Routes
@@ -16,6 +16,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Routes
 app.use('/auth', auth);
+
+app.get('/api/hello', (req, res) => {
+  res.send({ express: 'Hello From Express' });
+});
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -35,10 +39,11 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+
+
+
 // My port 
-app.listen(3000, () =>{
-  console.log('Listening on port 3000')
-})
+app.listen(port, () => console.log(`We're Listening on port ${port}`));
 
 // Export
 module.exports = app;
