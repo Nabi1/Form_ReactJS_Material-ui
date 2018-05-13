@@ -8,8 +8,9 @@ class SignUp extends React.Component {
       email: "Preums@leBo.com",
       password: "monPasswordSecret",
       checkPassword: "monPasswordSecret",
-      firstName: "Preums",
-      lastName: "Le Bô"
+      name: "Preums",
+      lastname: "Le Bô",
+      flash: ""
     };
 
     this.emailChange = this.emailChange.bind(this);
@@ -30,37 +31,43 @@ class SignUp extends React.Component {
     this.setState({checkPassword: e.target.value})
 }
   firstNameChange(e) {
-    this.setState({firstName: e.target.value})
+    this.setState({name: e.target.value})
 }
   lastNameChange(e) {
-    this.setState({lastName: e.target.value})
+    this.setState({lastname: e.target.value})
 }
 
   handleSubmit(e) {
     e.preventDefault();
     const validator = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (validator.test(this.state.email)) {
-        alert('Your mail seems to be valid');
+      fetch("/auth/signup",
+      {
+          method:  'POST',
+          headers:  new  Headers({
+              'Content-Type':  'application/json'
+          }),
+          body:  JSON.stringify(this.state),
+      })
+      .then(res  =>  res.json())
+      .then(
+          res  =>  this.setState({"flash":  res.flash}),
+          err  =>  this.setState({"flash":  err.flash})
+      );
     } else {
         alert("Your mail seems not to be valid, check it again !: ");
     }
     if (this.state.password !== this.state.checkPassword) {
         alert("Your passwords are different !")
     }
-    console.log(JSON.stringify(this.state,1,1));
 }
 
   render() {
     return(
       <div className="SignUp">
         <h1>
-          {/* {JSON.stringify(this.state,1,1)} */}
-          Prénom: {this.state.firstName}<br/>
-          Nom: {this.state.lastName}<br/>
-          Adresse de messagerie: {this.state.email}<br/>
-          Mot de passe: {this.state.password}<br/>
-          Confirmation: {this.state.checkPassword}
-
+          Inscription <br/>
+          {this.state.flash}
         </h1>
         <form onSubmit={this.handleSubmit}>
           <label>
@@ -84,13 +91,13 @@ class SignUp extends React.Component {
           <label>
             Entrez votre prénom:
           <br />
-            <input onChange={this.firstNameChange} type="text" name="firstName" value={this.state.firstName} />
+            <input onChange={this.firstNameChange} type="text" name="name" value={this.state.name} />
           </label>
           <br />
           <label>
             Entrez votre nom de famille:
           <br />
-            <input onChange={this.lastNameChange} type="text" name="lastName" value={this.state.lastName} />
+            <input onChange={this.lastNameChange} type="text" name="lastname" value={this.state.lastname} />
           </label>
           <br />
             <input type="submit" name="Envoyer"/>
