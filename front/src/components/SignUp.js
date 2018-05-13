@@ -5,10 +5,11 @@ class SignUp extends Component {
 		super(props);
 		this.state = {
       lastname: '',
-      firstname: '',
+      name: '',
 			email: '',
       password: '',
-      passwordcheck: ''
+      passwordcheck: '',
+      flash: ''
 		}
 	}
   updateLastnameField = (event) => {
@@ -18,7 +19,7 @@ class SignUp extends Component {
   }
   updateFirstnameField = (event) => {
     this.setState({
-      firstname: event.target.value
+      name: event.target.value
     })
   }
   updateEmailField = (event) => {
@@ -37,20 +38,34 @@ class SignUp extends Component {
 		})
   }
 
-  handleSubmit = () => {
-    console.log(JSON.stringify(this.state,1,1))
+  handleSubmit = (e) => {
+    //console.log(JSON.stringify(this.state,1,1))
+    e.preventDefault();
+    fetch("/auth/signup", {
+        method:  'POST',
+        headers:  new  Headers({
+            'Content-Type':  'application/json'
+        }),
+        body:  JSON.stringify(this.state),
+      })
+    .then(res  =>  res.json())
+    .then(
+        res  =>  this.setState({"flash":  res.flash}),
+        err  =>  this.setState({"flash":  err.flash})
+    )
   }
 
   render() {
   	return(
       <div>
         <h1>{JSON.stringify(this.state,1,1)}</h1>
+        <p>{this.state.flash}</p>
         <form onSubmit={this.handleSubmit}>
           <label>Nom
             <input onChange={this.updateLastnameField.bind(this)} type="text" name="lastname"/>
           </label>
           <label>Prénom
-            <input onChange={this.updateFirstnameField.bind(this)} type="text" name="firstname"/>
+            <input onChange={this.updateFirstnameField.bind(this)} type="text" name="name"/>
           </label>
           <label>Email
             <input onChange={this.updateEmailField.bind(this)} type="email" name="email"/>
