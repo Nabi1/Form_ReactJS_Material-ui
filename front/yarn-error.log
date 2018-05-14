@@ -14,23 +14,7 @@ Platform:
   darwin x64
 
 npm manifest: 
-  {
-      "name": "serveur",
-      "version": "1.0.0",
-      "description": "serveur de la Wild",
-      "main": "app.js",
-      "scripts": {
-          "start": "node app.js"
-      },
-      "author": "wilder",
-      "dependencies": {
-          "body-parser": "^1.18.2",
-          "express": "^4.16.3",
-          "morgan": "^1.9.0",
-          "mysql": "^2.15.0"
-      }
-      proxy: "http://localhost:5000/"
-  }
+  No manifest
 
 yarn manifest: 
   No manifest
@@ -39,9 +23,9 @@ Lockfile:
   No lockfile
 
 Trace: 
-  SyntaxError: /Users/FannyGaudin/Documents/Wild Code/quetes/LOdysseyDHomer/back/package.json: Unexpected token p in JSON at position 342
-      at JSON.parse (<anonymous>)
-      at /usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:1036:59
+  Error: Couldn't find a package.json file in "/Users/FannyGaudin/Documents/Wild Code/quetes/LOdysseyDHomer/front"
+      at new MessageError (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:186:110)
+      at /usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:40048:15
       at Generator.next (<anonymous>)
       at step (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:98:30)
       at /usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:109:13
