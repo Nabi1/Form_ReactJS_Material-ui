@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import { Route, BrowserRouter, Switch} from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import SignUp from './SignUp.js';
-import Home from './Home'
-import History from './History'
+import SignUp from './Components/SignUp.js';
+import Home from './Components/Home'
+import History from './Components/History'
 
 class App extends Component {
-
-//Render the app
   render() {
     return (
       <div className="App">
@@ -17,17 +16,15 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to the Bendo</h1>
         </header>
-
-
+        <MuiThemeProvider>
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={SignUp} />
             <Route path="/History" component={History} />
+            <Route path="/Home" component={Home} />
           </Switch>
         </BrowserRouter>
-        <div>
-          <SignUp />
-        </div>
+        </MuiThemeProvider>
       </div>
     );
   }
