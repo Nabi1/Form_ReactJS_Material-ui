@@ -50,7 +50,14 @@ class SignUp extends Component {
       })
     .then(res  =>  res.json())
     .then(
-        res  =>  this.setState({"flash":  res.flash}),
+        res  =>  this.setState({
+          "flash":  res.flash,
+          "lastname": '',
+          "name": '',
+    			"email": '',
+          "password": '',
+          "passwordcheck": ''
+        }),
         err  =>  this.setState({"flash":  err.flash})
     )
   }
@@ -62,19 +69,19 @@ class SignUp extends Component {
         <p>{this.state.flash}</p>
         <form onSubmit={this.handleSubmit}>
           <label>Nom
-            <input onChange={this.updateLastnameField.bind(this)} type="text" name="lastname"/>
+            <input onChange={this.updateLastnameField.bind(this)} type="text" name="lastname" value={this.state.lastname}/>
           </label>
           <label>Prénom
-            <input onChange={this.updateFirstnameField.bind(this)} type="text" name="name"/>
+            <input onChange={this.updateFirstnameField.bind(this)} type="text" name="name" value={this.state.name}/>
           </label>
           <label>Email
-            <input onChange={this.updateEmailField.bind(this)} type="email" name="email"/>
+            <input onChange={this.updateEmailField.bind(this)} type="email" name="email" value={this.state.email}/>
           </label>
           <label>Mot de passe
-            <input onChange={this.updatePasswordField.bind(this)} type="password" name="password"/>
+            <input onChange={this.updatePasswordField.bind(this)} type="password" name="password" value={this.state.password}/>
           </label>
           <label>Vérification du mot de passe
-            <input onChange={this.updatePasswordcheckField.bind(this)} type="password" name="passwordcheck"/>
+            <input onChange={this.updatePasswordcheckField.bind(this)} type="password" name="passwordcheck" value={this.state.passwordcheck}/>
           </label>
           <input type="submit" value="Soumettre"/>
         </form>
