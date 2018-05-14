@@ -37,16 +37,16 @@ class SignUp extends Component {
 		})
   }
 
-  handleSubmit = () => {
+  handleSubmit = (event) => {
+    event.preventDefault();
     console.log(JSON.stringify(this.state,1,1));
-    console.log(this.state);
   }
 
   render() {
   	return(
       <div>
         <h1>{JSON.stringify(this.state,1,1)}</h1>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <p>Last Name</p>
             <input onChange={this.updateLastnameField.bind(this)} type="text" name="lastname"/>
           <br />
@@ -62,7 +62,7 @@ class SignUp extends Component {
           <p>Validate Password</p>
             <input onChange={this.updateValidatePasswordField.bind(this)} type="password" name="validatepassword"/>
           <br />
-          <input onSubmit={this.handleSubmit} type="submit" value="Submit"/>
+          <input type="submit" value="Submit"/>
         </form>
       </div>
 	  );
