@@ -10,9 +10,13 @@ class SignUp extends Component {
                 password: "monPassw0rd",
                 passwordChecker: "monPassw0rd",
                 name: "James",
-                lastname: "Bond"
+                lastname: "Bond",
+                flash: ""
               }
+        
     }
+
+    
    
     updateEmailField(event) {
         this.setState({email: event.target.value})
@@ -36,8 +40,24 @@ class SignUp extends Component {
 
     handleSubmit(event) {
         console.log('new datas submitted: ' + JSON.stringify(this.state,1,1) );
-        event.preventDefault();
-    }
+        event.preventDefault();  
+        fetch("/auth/signup",
+        {
+            method:  'POST',
+            headers:  new  Headers({
+                'Content-Type':  'application/json'
+            }),
+            body:  JSON.stringify(this.state),
+            
+        })
+        .then(res  =>  res.json())
+        .then(
+            res  =>  this.setState({"flash":  res.flash}),
+            err  =>  this.setState({"flash":  err.flash})
+            
+        )
+        
+}
    
     render() { 
         return (

@@ -1,36 +1,36 @@
 const express = require('express');
 const app = express();
 const logger = require('morgan');
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser'); 
+const  http  =  require('http');
+const  path  =  require('path');
+const  morgan  =  require('morgan');
 
 const index = require('./routes/index');
 const authRouter = require('./routes/auth/auth');
 
 const connection = require('./helpers/db.js');
 
-app.use(logger('dev'));
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(__dirname  +  '/public'));
 
 app.use('/auth', authRouter);
 app.use('/', index);
 
-app.listen(3000, () => console.log('Port 3000 is waiting for you!'))	
+//app.listen(5000, () => console.log('Port 5000 is waiting for you!'))	
 
-// catch 404 and forward to error handler
+/// dans le cas d'une route non trouvée, je retourne le code 404 'Not Found'
 app.use(function(req, res, next) {
-    next(createError(404));
-  });
-  
-  // error handler
-  app.use(function(err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-  
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
-  });
+  var  err  =  new  Error('Not Found');
+  err.status  =  404;
+  next(err);
+});
+
+//je lance le serveur node
+let  server  =  app.listen( process.env.PORT  ||  5000, function(){
+  console.log('Listening on port '  +  server.address().port);
+});
 
 module.exports = app;
