@@ -10,8 +10,8 @@ class Timer extends Component {
     this.setState({
       currentCount: this.state.currentCount - 1
     })
-    if(this.state.currentCount < 1) {
-      this.state.currentCount = 60;
+      if(this.state.currentCount < 1) {
+       this.state.currentCount = 60;
     }
   }
   
