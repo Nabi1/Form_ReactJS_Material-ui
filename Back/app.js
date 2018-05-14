@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/auth", authRouter);
 app.use("/", index);
 
-app.listen(3000, () => console.log("Ecoute sur le port port 3000"));
+app.listen(5000, () => console.log("Ecoute sur le port 5000"));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

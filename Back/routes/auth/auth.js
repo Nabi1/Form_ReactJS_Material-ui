@@ -2,23 +2,20 @@ const express = require("express");
 const router = express.Router();
 const connection = require("../../helpers/db.js");
 
-router.post("/signup", (req, res, next) => {
-    let values = [
-        req.body.email,
-        req.body.password,
-        req.body.name,
-        req.body.lastname
-    ];
-
-    let user = `INSERT INTO users (email, password, name, lastname)
-  VALUES (?,?,?,?);`;
-
-    connection.query(user, values, function(err, rows, fields) {
-        if (err) {
-            res.status(500).end();
-        } else {
-            res.send("Database updated");
-        }
+router.post("/signup", function(req, res, next) {
+    let user = {
+        email: req.body.email,
+        password: req.body.password,
+        name: req.body.name,
+        lastname: req.body.lastname
+    };
+    connection.query("INSERT INTO users SET ?", user, function(
+        error,
+        results,
+        fields
+    ) {
+        if (error) res.status(500).json({ flash: error.message });
+        else res.status(200).json({ flash: "User has been signed up !" });
     });
 });
 
