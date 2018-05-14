@@ -4,21 +4,22 @@ class Formulaire extends Component {
     constructor(props){
         super(props);
         this.state= {
-            firstName:'',
-            lastName:'',
+            name:'',
+            lastname:'',
             email:'',
             password: '',
             confirmpassword:'',
+            flash:'',
         }
     }
-    updateFirstnameField = (e) => {
+    updateNameField = (e) => {
         this.setState({
-        firstName: e.target.value
+        name: e.target.value
         })
       }
       updateLastnameField = (e) => {
         this.setState({
-          lastName: e.target.value
+          lastname: e.target.value
         })
       }
       updateEmailField = (e) => {
@@ -40,7 +41,20 @@ class Formulaire extends Component {
       handleSubmit (e){
         e.preventDefault();
         console.log(JSON.stringify(this.state,1,1));
-      }
+        fetch("/auth/signup",
+                {
+                    method:  'POST',
+                    headers:  new  Headers({
+                        'Content-Type':  'application/json'
+                    }),
+                    body:  JSON.stringify(this.state),
+                })
+                .then(res  =>  res.json())
+                .then(
+                    res  =>  this.setState({"flash":  res.flash}),
+                    err  =>  this.setState({"flash":  err.flash})
+                )
+                    }
 
 
 render() {  
@@ -48,14 +62,14 @@ render() {
             <form onSubmit={this.handleSubmit.bind(this)}> 
                 <h1>{JSON.stringify(this.state,1,1)} </h1> 
                 <input
-                    name= 'firstName'
-                    placeholder='Firstname'
+                    name= 'name'
+                    placeholder='Name'
                     type="text"
-                    onChange={this.updateFirstnameField.bind(this)}
+                    onChange={this.updateNameField.bind(this)}
                 />
                 <br />
                 <input
-                    name="lastName"
+                    name="lastname"
                     placeholder='Lastname'
                     type="text"
                     onChange={this.updateLastnameField.bind(this)}
