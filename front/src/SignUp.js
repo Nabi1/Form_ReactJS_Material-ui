@@ -8,9 +8,11 @@ class SignUp extends Component {
       password: '',
       passwordbis:'',
       name: '',
-      lastname: '',
-      flash : ''
+      lastname: ''
     };
+    this.getChange = this.getChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
   }
 
   getChange(event) {
@@ -20,7 +22,7 @@ class SignUp extends Component {
 
   handleSubmit(event) {
     console.log(`A name was submitted : ${JSON.stringify(this.state,1,1)}`);    
-
+    event.preventDefault();
     fetch("/auth/signup", {
         method: 'POST',
         headers: new Headers({

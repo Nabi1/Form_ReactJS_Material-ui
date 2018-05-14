@@ -15,7 +15,7 @@ router.post('/signup', function (req, res, next) {
       });
     } else {
       res.status(200).json({
-        flash: "User has been signed up !"
+        flash: "Hey yaw ! Ya in da place, yaw !"
       });
     }
   });
