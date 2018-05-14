@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 const Input = (props) => {
     let style = {
         display: "block",
-        margin: 'auto'
+        margin: 'auto',
+        marginBottom: 15
       };
     return <input 
     type={props.type}

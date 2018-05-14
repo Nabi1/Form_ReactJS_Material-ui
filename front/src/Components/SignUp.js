@@ -17,8 +17,8 @@ const action = (
 class SignUp extends Component {
   constructor(props){
     super(props);
-    this.state = {email : '', password : '',password2 : '',name : '',
-    lastname : '',flash:""};}
+    this.state = {email : '', password : '',password2 : '',
+    name : '', lastname : '',flash:""};}
 
 // EL VALIDATOR
 validator (event) {
@@ -35,6 +35,7 @@ change (event) {this.setState(
 
 //FONCTION D'ENVOI DU FORMULAIRE 
 submit(event) {
+  event.preventDefault()
       //AJAX REQUEST 
   fetch("/auth/signup",
 {
@@ -44,13 +45,20 @@ submit(event) {
 })
 .then(res => res.json()).then(
     res => this.setState({"flash": res.flash}),
-    err => this.setState({"flash": err.flash})
+    err => this.setState({"flash": err.flash}),
+    document.querySelector('form').reset()
 )
 //fin ajax
   console.log(JSON.stringify(this.state,1,1));
   alert('Formulaire envoyé!');
 }
+/*
+componentDidUpdate() {
+this.setState({flash:})
 
+  console.log('ok');
+}
+*/
 
 // JSON + FLASH + PWD COMPLEXITY
   render() {
@@ -66,10 +74,12 @@ submit(event) {
         style={{textAlign: 'center',
         backgrounColor: 'white'
         }}>
-            <img src="http://images.innoveduc.fr/react_odyssey_homer/wildhomer.png"  />
+            <img 
+            src="http://images.innoveduc.fr/react_odyssey_homer/wildhomer.png" 
+            alt='homer' />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <form onSubmit={this.submit.bind(this)}>
+          <form id='form' onSubmit={this.submit.bind(this)}>
               <h2>FORMULAIRE</h2>
               <Label name='Name'/>
               <Input type="name" name="name" placeholder='name'
@@ -97,6 +107,12 @@ submit(event) {
               variant="raised" 
               color="primary">
               ENVOYER
+              </Button>
+              <Button 
+              type="reset" 
+              variant="raised" 
+              color="disabled">
+              RESET
               </Button>
         </form>
         </Grid>
