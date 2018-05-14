@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const index = require('./routes/index');
 const authRouter = require('./routes/auth/auth');
 
+const connection = require('./helpers/db.js');
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
