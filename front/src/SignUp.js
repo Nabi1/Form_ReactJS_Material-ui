@@ -8,7 +8,8 @@ class SignUp extends Component {
       password: '',
       passwordbis:'',
       name: '',
-      lastname: ''
+      lastname: '',
+      flash : ''
     };
   }
 
@@ -19,13 +20,30 @@ class SignUp extends Component {
 
   handleSubmit(event) {
     console.log(`A name was submitted : ${JSON.stringify(this.state,1,1)}`);    
-    event.preventDefault();
+
+    fetch("/auth/signup", {
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify(this.state,1,1),
+      })
+      .then(res => res.json())
+      .then(
+        res => this.setState({
+          'flash' : res.flash
+        }),
+        err => this.setState({
+          'flash' : err.flash
+        })
+      )
   }
 
   render() {
     return(
       <div>
         <h1>{JSON.stringify(this.state,1,1)}</h1>
+        <p>{this.state.flash}</p>
         <form onSubmit = {this.handleSubmit.bind(this)}>
           <input type='text' name='email' placeholder = 'nom@email.com' value={this.state.email} onChange={this.getChange.bind(this)} /><br/>
           <input type='text' name='password' placeholder = 'monPassw0rd' value={this.state.password} onChange={this.getChange.bind(this)}/><br/>

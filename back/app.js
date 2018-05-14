@@ -26,7 +26,7 @@ app.use('/auth', authRouter);
 //     next(err);
 // });
 
-let server  =  app.listen( process.env.PORT  ||  3000, function(){
+let server  =  app.listen( 5000, () => {
     console.log('Listening on port '  +  server.address().port);
 });
 
