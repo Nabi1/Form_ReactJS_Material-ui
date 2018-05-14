@@ -2,19 +2,23 @@ import React, {Component} from 'react';
 import Navbar from './Navbar';
 import Input from './Input';
 import Label from './Label';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Grid from '@material-ui/core/Grid';
-
-/*const handlers = require('react-handlers');*/
-/*import {GridList, GridTile} from 'material-ui/GridList';*/
+import Button from '@material-ui/core/Button';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
 
 let pwd = ""; //complexity pwd display
 let pwd2= ""; // match pwd function
+const action = (
+  <Button color="secondary" size="small">
+    Life is Bendo...
+  </Button>
+);
 
 class SignUp extends Component {
   constructor(props){
     super(props);
-    this.state = {email : '', password : '',password2 : '',name : '',lastname : '',flash:''};}
+    this.state = {email : '', password : '',password2 : '',name : '',
+    lastname : '',flash:""};}
 
 // EL VALIDATOR
 validator (event) {
@@ -47,22 +51,25 @@ submit(event) {
   alert('Formulaire envoyé!');
 }
 
+
 // JSON + FLASH + PWD COMPLEXITY
   render() {
     return(
       <div>
         <Navbar />
-        <h5>{JSON.stringify(this.state,1,1)}</h5>
-        <h1>{this.state.flash}</h1>
+        {/*<h5>{JSON.stringify(this.state,1,1)}</h5>*/}
         <h3>{pwd}</h3>
         <h3>{pwd2}</h3>
-        <Grid  
-            item  
-            xs={12}  
-            sm={6}
-            style={{ 'text-align':  'center' }}>
-            <img  src="http://images.innoveduc.fr/react_odyssey_homer/wildhomer.png"  />
-        <form onSubmit={this.submit.bind(this)}>
+        <Grid container style={{backgroundColor: 'white'
+        }} >
+        <Grid  item  xs={12}  sm={6} 
+        style={{textAlign: 'center',
+        backgrounColor: 'white'
+        }}>
+            <img src="http://images.innoveduc.fr/react_odyssey_homer/wildhomer.png"  />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <form onSubmit={this.submit.bind(this)}>
               <h2>FORMULAIRE</h2>
               <Label name='Name'/>
               <Input type="name" name="name" placeholder='name'
@@ -84,9 +91,25 @@ submit(event) {
               <Input type="password" name="password2" placeholder='password2'
               value={this.state.password2} change={this.change.bind(this)}
               />
-              <input type="submit" value="SEND" />
-
+              {/*<input type="submit" value="SEND" />*/}
+              <Button 
+              type="submit" 
+              variant="raised" 
+              color="primary">
+              ENVOYER
+              </Button>
         </form>
+        </Grid>
+        </Grid>
+        <Grid item xs={12} sm={6}
+        style={{textAlign: 'center',
+        margin: 'auto',
+        borderRadius: 10        
+        }}>
+        <SnackbarContent
+        message={this.state.flash}
+        action={action} 
+      />
         </Grid>
       </div>
     );

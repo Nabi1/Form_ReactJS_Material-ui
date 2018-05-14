@@ -2,16 +2,7 @@
 const express = require('express');
 let mysql = require('mysql');
 const router = express.Router();
-/*const connection = require('./helpers/db.js');*/
-
-// mysql connection
-
-let connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "doyouknowthebendo",
-  database: "form"
-});
+const connection = require('../../helpers/db.js');
 
 // Retrieve/send data 
 router.post('/signup', (req, res, next) => {
@@ -29,7 +20,6 @@ router.post('/signup', (req, res, next) => {
       res.status(200).json({
           flash: "You are a boss !"
       });
-      res.end()
   }
 });
 });
