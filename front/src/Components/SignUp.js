@@ -5,6 +5,8 @@ import Label from './Label';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
+import ciri from '../Ciri.png';
+import witcher from '../theWitcher3.jpg';
 
 let pwd = ""; //complexity pwd display
 let pwd2= ""; // match pwd function
@@ -18,7 +20,14 @@ class SignUp extends Component {
   constructor(props){
     super(props);
     this.state = {email : '', password : '',password2 : '',
-    name : '', lastname : '',flash:""};}
+    name : '', lastname : '',flash:'', persons: false};}
+
+
+// SHOW THE FORM
+show = () => {
+  const isValid = this.state.persons;
+  this.setState({persons: !isValid})
+}
 
 // EL VALIDATOR
 validator (event) {
@@ -36,7 +45,7 @@ change (event) {this.setState(
 //FONCTION D'ENVOI DU FORMULAIRE 
 submit(event) {
   event.preventDefault()
-      //AJAX REQUEST 
+      //ajax request 
   fetch("/auth/signup",
 {
     method: 'POST',
@@ -52,13 +61,6 @@ submit(event) {
   console.log(JSON.stringify(this.state,1,1));
   alert('Formulaire envoyé!');
 }
-/*
-componentDidUpdate() {
-this.setState({flash:})
-
-  console.log('ok');
-}
-*/
 
 // JSON + FLASH + PWD COMPLEXITY
   render() {
@@ -68,15 +70,19 @@ this.setState({flash:})
         {/*<h5>{JSON.stringify(this.state,1,1)}</h5>*/}
         <h3>{pwd}</h3>
         <h3>{pwd2}</h3>
-        <Grid container style={{backgroundColor: 'white'
-        }} >
+        <Button onClick={this.show.bind(this)} variant="raised" color="secondary">
+        REVEAL THE FORM
+        </Button>
+        {this.state.persons ?
+        <div>
+        <Grid container style={{backgroundColor: 'white'}} >
         <Grid  item  xs={12}  sm={6} 
         style={{textAlign: 'center',
         backgrounColor: 'white'
         }}>
             <img 
-            src="http://images.innoveduc.fr/react_odyssey_homer/wildhomer.png" 
-            alt='homer' />
+            src={ciri} 
+            alt='ciri' />
         </Grid>
         <Grid item xs={12} sm={6}>
           <form id='form' onSubmit={this.submit.bind(this)}>
@@ -102,31 +108,25 @@ this.setState({flash:})
               value={this.state.password2} change={this.change.bind(this)}
               />
               {/*<input type="submit" value="SEND" />*/}
-              <Button 
-              type="submit" 
-              variant="raised" 
-              color="primary">
+              <Button type="submit" variant="raised" color="primary">
               ENVOYER
               </Button>
-              <Button 
-              type="reset" 
-              variant="raised" 
-              color="disabled">
+              <Button type="reset" variant="raised" color="disabled">
               RESET
               </Button>
         </form>
         </Grid>
         </Grid>
+        {this.state.flash ?
+        <div>
         <Grid item xs={12} sm={6}
-        style={{textAlign: 'center',
-        margin: 'auto',
-        borderRadius: 10        
-        }}>
+        style={{textAlign: 'center', margin: 'auto'}}>
         <SnackbarContent
         message={this.state.flash}
-        action={action} 
-      />
+        action={action} />
         </Grid>
+        </div> : null }
+        </div> : null }
       </div>
     );
   }
