@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import {TextField} from 'material-ui'; 
+import {Grid} from 'material-ui';
+import {Paper} from 'material-ui';
+import {Button} from 'material-ui'; 
+import {Snackbar} from 'material-ui';
 
 class Formulaire extends Component {
     constructor(props){
@@ -56,48 +61,92 @@ class Formulaire extends Component {
                 )
                     }
 
+        
+            
+
+            handleClick = state => () => {
+                this.setState({ open: true, ...state });
+            };
+
+            handleClose = () => {
+                this.setState({ open: false });
+            };
+
 
 render() {  
+    const { vertical, horizontal, open } = this.state;
     return (
             <form onSubmit={this.handleSubmit.bind(this)}> 
-                <h1>{JSON.stringify(this.state,1,1)} </h1> 
-                <input
+                <Paper elevation={4}
+                style={{ margin:  34 }}>
+                <Grid container>
+                    <Grid  item  xs={12}  sm={6}>
+                    <img src="http://images.innoveduc.fr/react_odyssey_homer/wildhomer.png" alt="homer"  />
+                    </Grid>
+                    <Grid  item  xs={12}  sm={6}>
+                {/* <h1>{JSON.stringify(this.state,1,1)} </h1>  */}
+                <h1>Sign Up!</h1>
+                <TextField
+                    label='Name'
                     name= 'name'
-                    placeholder='Name'
+                    placeholder=''
                     type="text"
                     onChange={this.updateNameField.bind(this)}
                 />
                 <br />
-                <input
+                <TextField
+                    label='Lastname'
                     name="lastname"
-                    placeholder='Lastname'
+                    placeholder=''
                     type="text"
                     onChange={this.updateLastnameField.bind(this)}
                 />
                 <br />
-                <input
+                <TextField
+                    label='Email'
                     name="email"
-                    placeholder='Email'
+                    placeholder=''
                     type="email"
                     onChange={this.updateEmailField.bind(this)}
                 />
                 <br />
-                <input
+                <TextField
+                    label='Password'
                     name="password"
-                    placeholder='Password'
+                    placeholder=''
                     type="password"
                     onChange={this.updatePasswordField.bind(this)}
                 />
                 <br />
-                <input
+                <TextField
+                    label='Confirm Password'
                     name="confirm_password"
-                    placeholder='Confirm Password'
+                    placeholder=''
                     type="password"
                     onChange={this.updateConfirmPasswordField.bind(this)}
                 />
                 <br />
-                <input type='submit' value="Submit" />
-             
+                
+                <Button onClick={this.handleClick({ vertical: 'bottom', horizontal: 'center' })}variant="raised" color="primary"type='submit' value="Submit"
+                style={{ margin:  34 }}>Submit
+                </Button>
+                    <Snackbar
+                    anchorOrigin={{ vertical, horizontal }}
+                    open={open}
+                    onClose={this.handleClose}
+                    ContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={<span id="message-id">Users has been sign up!</span>}
+                    />
+
+
+
+
+
+                </Grid>
+                </Grid>
+                </Paper>
             </form>
         );
     } 
