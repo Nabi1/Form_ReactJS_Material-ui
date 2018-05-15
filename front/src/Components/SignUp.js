@@ -20,7 +20,7 @@ class SignUp extends Component {
   constructor(props){
     super(props);
     this.state = {email : '', password : '',password2 : '',
-    name : '', lastname : '',flash:'', persons: false};}
+    name : '', lastname : '',flash:'', persons: false, background: true};}
 
 
 // SHOW THE FORM
@@ -73,12 +73,21 @@ submit(event) {
         <Button onClick={this.show.bind(this)} variant="raised" color="secondary">
         REVEAL THE FORM
         </Button>
+        {!this.state.persons ?
+        <div>
+        <img 
+            src={witcher} 
+            alt='witcher' />
+        </div>
+             : null }
         {this.state.persons ?
         <div>
-        <Grid container style={{backgroundColor: 'white'}} >
+        <Grid container style={{
+          backgroundColor: 'white', 
+          width: '95%', 
+          margin:'auto'}} >
         <Grid  item  xs={12}  sm={6} 
         style={{textAlign: 'center',
-        backgrounColor: 'white'
         }}>
             <img 
             src={ciri} 
