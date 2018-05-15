@@ -1,4 +1,47 @@
 import React, {Component} from 'react';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import TextField from '@material-ui/core/TextField';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import IconButton from '@material-ui/core/IconButton';
+import Snackbar from '@material-ui/core/Snackbar';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import Slide from '@material-ui/core/Slide';
+
+
+const styles = theme => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    flexBasis: 70,
+  },
+  button: {
+   margin: theme.spacing.unit,
+ },
+ leftIcon: {
+   marginRight: theme.spacing.unit,
+ },
+ rightIcon: {
+   marginLeft: theme.spacing.unit,
+ },
+ iconSmall: {
+   fontSize: 20,
+ },
+});
+
+function TransitionLeft(props) {
+  return <Slide direction="left" {...props} />;
+}
 
 class SignUp extends Component {
   constructor(props) {
@@ -9,7 +52,10 @@ class SignUp extends Component {
 			email: '',
       password: '',
       passwordcheck: '',
-      flash: ''
+      flash: '',
+      showPassword: false,
+      open: false,
+      Transition: null
 		}
 	}
   updateLastnameField = (event) => {
@@ -62,32 +108,118 @@ class SignUp extends Component {
     )
   }
 
+  handleClickShowPassword = () => {
+    this.setState({ showPassword: !this.state.showPassword });
+  };
+
+  handleClick = Transition => () => {
+      this.setState({ open: true, Transition });
+    };
+
+    handleClose = () => {
+      this.setState({ open: false });
+    };
+
   render() {
+    const { classes } = this.props;
+
   	return(
       <div>
-        <h1>{JSON.stringify(this.state,1,1)}</h1>
-        <p>{this.state.flash}</p>
+        {/*<p>{JSON.stringify(this.state,1,1)}</p>*/}
+        <h1>Inscription</h1>
+        <Snackbar
+          open={this.state.open}
+          onClose={this.handleClose}
+          TransitionComponent={this.state.Transition}
+          ContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={this.state.flash}
+        />
         <form onSubmit={this.handleSubmit}>
-          <label>Nom
-            <input onChange={this.updateLastnameField.bind(this)} type="text" name="lastname" value={this.state.lastname}/>
-          </label>
-          <label>Prénom
-            <input onChange={this.updateFirstnameField.bind(this)} type="text" name="name" value={this.state.name}/>
-          </label>
-          <label>Email
-            <input onChange={this.updateEmailField.bind(this)} type="email" name="email" value={this.state.email}/>
-          </label>
-          <label>Mot de passe
-            <input onChange={this.updatePasswordField.bind(this)} type="password" name="password" value={this.state.password}/>
-          </label>
-          <label>Vérification du mot de passe
-            <input onChange={this.updatePasswordcheckField.bind(this)} type="password" name="passwordcheck" value={this.state.passwordcheck}/>
-          </label>
-          <input type="submit" value="Soumettre"/>
+            <FormGroup>
+              <TextField
+                required
+                id="lastname"
+                label="Nom"
+                value={this.state.lastname}
+                onChange={this.updateLastnameField.bind(this)}
+                margin="normal"
+              />
+
+              <TextField
+                required
+                id="name"
+                label="Prénom"
+                value={this.state.name}
+                onChange={this.updateFirstnameField.bind(this)}
+                margin="normal"
+              />
+
+              <TextField
+                required
+                id="email"
+                label="Email"
+                value={this.state.email}
+                onChange={this.updateEmailField.bind(this)}
+                margin="normal"
+                autoComplete="email"
+              />
+
+              <FormControl className={classNames(classes.margin, classes.textField)}>
+                <InputLabel htmlFor="password">Mot de passe</InputLabel>
+                <Input
+                  id="password"
+                  type={this.state.showPassword ? 'text' : 'password'}
+                  value={this.state.password}
+                  onChange={this.updatePasswordField.bind(this)}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="Toggle password visibility"
+                        onClick={this.handleClickShowPassword}
+                        onMouseDown={this.handleMouseDownPassword}
+                      >
+                        {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
+
+              <FormControl className={classNames(classes.margin, classes.textField)}>
+                <InputLabel htmlFor="password">Vérification du mot de passe</InputLabel>
+                <Input
+                  id="passwordcheck"
+                  type={this.state.showPassword ? 'text' : 'password'}
+                  value={this.state.passwordcheck}
+                  onChange={this.updatePasswordcheckField.bind(this)}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="Toggle password visibility"
+                        onClick={this.handleClickShowPassword}
+                        onMouseDown={this.handleMouseDownPassword}
+                      >
+                        {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
+             </FormGroup>
+             <Button type="submit" className={classes.button} variant="raised" color="primary" onClick={this.handleClick(TransitionLeft)}>
+               S'inscrire
+               <Icon className={classes.rightIcon}>send</Icon>
+             </Button>
         </form>
       </div>
 	  );
   }
 }
 
-export default SignUp;
+SignUp.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(SignUp);
