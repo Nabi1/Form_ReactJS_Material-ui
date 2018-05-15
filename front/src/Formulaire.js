@@ -137,12 +137,8 @@ render() {
                     ContentProps={{
                         'aria-describedby': 'message-id',
                     }}
-                    message={<span id="message-id">Users has been sign up!</span>}
+                    message={<span id="message-id">{this.state.flash}</span>}
                     />
-
-
-
-
 
                 </Grid>
                 </Grid>
