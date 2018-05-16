@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import TextField from 'material-ui/TextField';
 
 const Input = (props) => {
     let style = {
         display: "block",
-        margin: 'auto',
-        marginBottom: 15
+        margin: 'auto'
       };
-    return <input 
+    return <TextField 
     type={props.type}
     name={props.name}
     style={style} 
     placeholder={props.placeholder}
     onChange={props.change}
+    errorText="This field is required"
     required />
 }
 

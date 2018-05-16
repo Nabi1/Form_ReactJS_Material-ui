@@ -8,6 +8,7 @@ import SnackbarContent from '@material-ui/core/SnackbarContent';
 import ciri from '../Ciri.png';
 import witcher from '../theWitcher3.jpg';
 
+//VARIABLES
 let pwd = ""; //complexity pwd display
 let pwd2= ""; // match pwd function
 const action = (
@@ -16,6 +17,7 @@ const action = (
   </Button>
 );
 
+// STATE SIGN UP
 class SignUp extends Component {
   constructor(props){
     super(props);
@@ -38,11 +40,11 @@ validator (event) {
    event.target.value !== this.state.password2 ? pwd2= 'Please type the same pwd' : pwd2= 'Ok, same pwd !'
 }
 
-//MAJ VALEUR INPUT
+//MAJ VALEURS INPUT
 change (event) {this.setState(
   {[event.target.name] : event.target.value});}
 
-//FONCTION D'ENVOI DU FORMULAIRE 
+//FONCTION D'ENVOI DU FORMULAIRE AJAX
 submit(event) {
   event.preventDefault()
       //ajax request 
@@ -62,7 +64,7 @@ submit(event) {
   alert('Formulaire envoyé!');
 }
 
-// JSON + FLASH + PWD COMPLEXITY
+// JSON + FLASH + PWD COMPLEXITY + DISPLAY ON CONDITION
   render() {
     return(
       <div>
@@ -97,26 +99,25 @@ submit(event) {
           <form id='form' onSubmit={this.submit.bind(this)}>
               <h2>FORMULAIRE</h2>
               <Label name='Name'/>
-              <Input type="name" name="name" placeholder='name'
+              <Input type="name" name="name" placeholder='Jean'
               value={this.state.name} change={this.change.bind(this)}
               />
               <Label name='Last Name'/>
-              <Input type="lastname" name="lastname" placeholder='lastname'
+              <Input type="lastname" name="lastname" placeholder='Jacques'
               value={this.state.lastname} change={this.change.bind(this)}
               />              
               <Label name='Email'/>
-              <Input type="email" name="email" placeholder='email'
+              <Input type="email" name="email" placeholder='JJ@live.fr'
               value={this.state.email} change={this.change.bind(this)}
               />
               <Label name='Password'/>
-              <Input type="password" name="password" placeholder='password'
+              <Input type="password" name="password" placeholder='JJ33@@'
               value={this.state.password} change={this.validator.bind(this)}
               />
               <Label name='Password2'/>
-              <Input type="password" name="password2" placeholder='password2'
+              <Input type="password" name="password2" placeholder='JJ33@@'
               value={this.state.password2} change={this.change.bind(this)}
               />
-              {/*<input type="submit" value="SEND" />*/}
               <Button type="submit" variant="raised" color="primary">
               ENVOYER
               </Button>

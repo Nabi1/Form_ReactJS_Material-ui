@@ -6,7 +6,8 @@ class Home extends Component {
         return (
             <div>
                 <Navbar />
-                <p>Bienvenue dans la Caravane, <br/>fais comme chez les Gitsy: t'es pas chez toi ici !!</p>
+                <p>Bienvenue dans la Caravane, 
+                    <br/>fais comme chez les Gitsy: t'es pas chez toi ici !!</p>
             </div>
         );
     }
