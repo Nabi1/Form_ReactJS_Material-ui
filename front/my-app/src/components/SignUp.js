@@ -6,40 +6,46 @@ class SignUp extends Component {
 		this.state ={
             email:"test@test.com",
             password : "monPassw0rd",
-            passwordbis : "monPassw0rdbis",
             name : "James",
-            lastname : "Bond"
+            lastname : "Bond",
+            flash : ""
         };
-        this.handleSubmit= this.handleSubmit.bind(this);
+        this.handleChange= this.handleChange.bind(this);
     }
     
-    SwitchEmail(e){this.setState({email:e.target.value})};
-    SwitchPassword(e) {this.setState({password:e.target.value})};
-    SwitchPasswordbis(e) {this.setState({passwordbis:e.target.value})};
-    SwitchName(e) {this.setState({name:e.target.value})};
-    SwitchLastname(e){this.setState({lastname:e.target.value})};
+    handleChange(e){this.setState({[e.target.name]:e.target.value})};
        
     handleSubmit(e){
-        e.preventDefault();
-        console.log(JSON.stringify(this.state,1,1));    
+        console.log(JSON.stringify(this.state,1,1));
+        fetch("/auth/signup",
+            {
+                method:  'POST',
+                headers:  new  Headers({
+                    'Content-Type':  'application/json'
+                }),
+                body:  JSON.stringify(this.state),
+            })
+        .then(res  =>  res.json())
+        .then(
+            res  =>  this.setState({"flash":  res.flash}),
+            err  =>  this.setState({"flash":  err.flash})
+        ) ;  e.preventDefault(); 
     }
 
     render(){
         return(
             <div>
                 <h1>{JSON.stringify(this.state,1,1)}</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <input type="email"  name="email" onChange={this.SwitchEmail.bind(this)}/> 
-                    <input type="password"  name="password" onChange={this.SwitchPassword.bind(this)}/> 
-                    <input type="password"  name="passwordbis" onChange={this.SwitchPasswordbis.bind(this)}/> 
-                    <input type="text"  name="name" onChange={this.SwitchName.bind(this)}/> 
-                    <input type="text"  name="lastname" onChange={this.SwitchLastname.bind(this)}/>
+                <form onSubmit={this.handleSubmit.bind(this)}>
+                    <input type="email"  name="email" onChange={this.handleChange}/> 
+                    <input type="password"  name="password" onChange={this.handleChange}/> 
+                    <input type="text"  name="name" onChange={this.handleChange}/> 
+                    <input type="text"  name="lastname" onChange={this.handleChange}/>
                     <input type="submit" value="Soumettre"/>
                 </form>
             </div>
         );
     }
 }
-
 export default SignUp;
 
