@@ -1,11 +1,10 @@
- import React, {Component} from 'react';
+import React, {Component} from 'react';
+import {TextField, Button, InputLabel, Snackbar} from 'material-ui'; 
+
 
 class SignUp extends Component {
   constructor(props) {
     super(props);
-/*
-======== STATE =========
-*/
     this.state = {
       email : '',
       password : '',
@@ -13,12 +12,12 @@ class SignUp extends Component {
       name: '',
       lastname : '',
       flash: '',
+      open:false,
     };
   }
 /*
 ======== FONCTIONS =======
 */
-
 updateEmailField = (event) => {
     this.setState({
       email: event.target.value,
@@ -49,8 +48,11 @@ updateEmailField = (event) => {
   }
 
 
-    handleSubmit = (event) => {
+  handleSubmit = (event) => {
         event.preventDefault()
+        this.setState({
+          open:true
+        })
         console.log(JSON.stringify(this.state, 1, 1))
         fetch("/auth/signup", {
                 method: 'POST',
@@ -68,7 +70,6 @@ updateEmailField = (event) => {
                     "flash": err.flash
                 })
             )
-
     }
 /*
 ======== RENDER ==========
@@ -76,68 +77,74 @@ updateEmailField = (event) => {
   render() {
     return(
       <div>
-        <h1>
-          {JSON.stringify(this.state,1,1)}
-        </h1>
+        <h2>
+         Sign Up !
+        </h2>
         <form onSubmit={this.handleSubmit}>
           <div>
-            <label htmlFor="">Email </label>
-            <input 
+            <InputLabel htmlFor="">Email </InputLabel>
+            <TextField 
+             id="name"
               type="email"
               className="form-control" 
               name="email" 
               placeholder="Email" 
               onChange= {this.updateEmailField}
+              fullWidth
+              margin='normal'
             />
           </div>
           <div>
             {/* Mot de passe */}
-            <label htmlFor="">New Password </label>
-            <input type="password" 
+            <InputLabel htmlFor="">New Password </InputLabel>
+            <TextField type="password" 
             className="form-control" 
             aria-describedby="emailHelp" 
             placeholder="New password" 
             onChange= {this.updatePassWordField}
-           /* onChange={  this.formUpdate }*/
+            fullWidth
            />
           </div>
           <div>
            {/* Vérification du mot de passe */}
-            <label htmlFor="">Check Password </label>
-            <input type="password" 
+            <InputLabel htmlFor="">Check Password </InputLabel>
+            <TextField type="password" 
               className="form-control" 
               aria-describedby="emailHelp" 
               placeholder="Enter the same password" 
               onChange= {this.updateCheckPassWordField}
-            /* onChange={ this.formUpdate }*/
+              fullWidth
             />
            </div>
            <div>
             {/* Prénom */}
-            <label htmlFor="">First Name </label>
-             <input 
+            <InputLabel htmlFor="">First Name </InputLabel>
+             <TextField 
               type="text"
               className="form-control" 
               name="name" 
               placeholder="Jean" 
               onChange= {this.updateFirstNameField}
+              fullWidth
               />
             </div>
             <div>
              {/* Nom */}
-             <label htmlFor="">Last name </label>
-              <input 
-                type="text"
-                className="form-control" 
-                name="Lastname" 
-                placeholder="Dujardin" 
-                onChange= {this.updateLastNameField}
+             <InputLabel htmlFor="">Last name </InputLabel>
+              <TextField  type="text" className="form-control"  name="Lastname" 
+                placeholder="Dujardin"  onChange= {this.updateLastNameField}
+                fullWidth
               />
             </div>
             <div>
-              <input type='submit' value='Submit'></input>
+              <Button type='submit' value='Submit' variant="raised" 
+              color="secondary">Submit</Button>
             </div>
           </form>
+          <Snackbar open={this.state.open} message={this.state.flash} 
+            autoHideDuration={4000}
+          >
+          </Snackbar>
         </div>
     );
   }
