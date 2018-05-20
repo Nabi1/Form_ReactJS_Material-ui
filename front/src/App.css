@@ -1,10 +1,6 @@
-body {
-  height: 100vh;
-  width: 100vw;
-}
-
 .App {
   text-align: center;
+  min-height: 100vh;
 }
 
 .Homer {
@@ -20,6 +16,7 @@ body {
 
 .App-title {
   font-size: 1.5em;
+  color: black;
 }
 
 .App-intro {
@@ -34,6 +31,13 @@ body {
 .PreumsKat {
   float: left;
   margin: 5px;
+}
+
+.SignUp{
+  padding: 1rem;
+}
+.SignUp button {
+  margin-top: 1.5rem;
 }
 
 .Footer {
