@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {TextField, Button, InputLabel, Snackbar} from 'material-ui'; 
+import {TextField, Button, Snackbar} from 'material-ui'; 
 import AlertDialogSlide from './AlertDialogSlide'
 
 let hint="";
@@ -172,6 +172,7 @@ updateEmailField = (event) => {
             onChange= {this.updatePassWordField}
             fullWidth
             helperText={hint}
+            margin="normal"
            />
           </div>
           <div>
@@ -186,6 +187,7 @@ updateEmailField = (event) => {
                 ? 'Ok'
                 : 'Enter the same password'
               }
+              margin='normal'
             />
            </div>
            <div>
@@ -197,6 +199,7 @@ updateEmailField = (event) => {
               placeholder="Jean" 
               onChange= {this.updateFirstNameField}
               fullWidth
+              margin='normal'
               />
             </div>
             <div>
@@ -204,6 +207,7 @@ updateEmailField = (event) => {
               <TextField  type="text" className="form-control"  name="Lastname" 
                 placeholder="Dujardin"  onChange= {this.updateLastNameField}
                 fullWidth
+                margin='normal'
               />
             </div>
             <div>
