@@ -2,6 +2,11 @@ import React, {Component} from 'react';
 import {TextField, Button, InputLabel, Snackbar} from 'material-ui'; 
 import AlertDialogSlide from './AlertDialogSlide'
 
+let hint="";
+const faible = /[a-z]{1,5}/g
+const medium = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{5,}$/g;
+const lastLevel= /^(?=.*[a-z])(?=.*[A-Z])(?=.*[$@$!%*?&])[A-Za-z$@$!%*?&]{6,}/g;
+
 class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -15,11 +20,14 @@ class SignUp extends Component {
       open:false,
       alert:false,
       messageDialogue:[],
+      input:''
     };
   }
 /*
 ======== FONCTIONS =======
 */
+
+
 formSend = () => {
   let whatIsMissing = [];
   if (this.state.email===''){
@@ -99,7 +107,20 @@ updateEmailField = (event) => {
  updatePassWordField = (event) => {
     this.setState({
       password: event.target.value,
+      input: event.target.value
     });
+    if (this.state.input.match(faible)<2) {
+      hint = 'Mot de passe trop court'
+    }
+    else if (this.state.input.match(medium)){
+        hint = 'Mot de passe trop moyen' 
+    }
+     else if (this.state.input.match(lastLevel)) {
+      hint = `OK c'est good`
+    }
+    else {
+      hint = "Votre mdp doit contenir 6 caractères, une majuscule et un caractère spécial"
+    }
   }
 
  updateCheckPassWordField = (event) => {
@@ -119,8 +140,6 @@ updateEmailField = (event) => {
     });
   }
 
-
-
 /*
 ======== RENDER ==========
 */
@@ -132,7 +151,6 @@ updateEmailField = (event) => {
         </h2>
         <form onSubmit={this.handleSubmit}>
           <div>
-            <InputLabel htmlFor="">Email </InputLabel>
             <TextField 
              id="name"
               type="email"
@@ -142,33 +160,36 @@ updateEmailField = (event) => {
               onChange= {this.updateEmailField}
               fullWidth
               margin='normal'
+              
             />
           </div>
           <div>
             {/* Mot de passe */}
-            <InputLabel htmlFor="">New Password </InputLabel>
             <TextField type="password" 
             className="form-control" 
             aria-describedby="emailHelp" 
             placeholder="New password" 
             onChange= {this.updatePassWordField}
             fullWidth
+            helperText={hint}
            />
           </div>
           <div>
            {/* Vérification du mot de passe */}
-            <InputLabel htmlFor="">Check Password </InputLabel>
             <TextField type="password" 
               className="form-control" 
               aria-describedby="emailHelp" 
               placeholder="Enter the same password" 
               onChange= {this.updateCheckPassWordField}
               fullWidth
+              helperText={this.state.password === this.state.checkPassWord && this.state.checkPassWord.length>0
+                ? 'Ok'
+                : 'Enter the same password'
+              }
             />
            </div>
            <div>
             {/* Prénom */}
-            <InputLabel htmlFor="">First Name </InputLabel>
              <TextField 
               type="text"
               className="form-control" 
@@ -180,7 +201,6 @@ updateEmailField = (event) => {
             </div>
             <div>
              {/* Nom */}
-             <InputLabel htmlFor="">Last name </InputLabel>
               <TextField  type="text" className="form-control"  name="Lastname" 
                 placeholder="Dujardin"  onChange= {this.updateLastNameField}
                 fullWidth
@@ -188,7 +208,7 @@ updateEmailField = (event) => {
             </div>
             <div>
               <Button onClick={this.handleSubmit} type='submit' value='Submit' variant="raised" 
-              color="secondary">Submit</Button>
+              color="secondary">Hit me</Button>
             </div>
           </form>
           <Snackbar 
