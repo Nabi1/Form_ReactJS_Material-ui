@@ -7,7 +7,7 @@ import AlertDialogSlide from "./AlertDialogSlide";
 let hint = "";
 const faible = /[a-z]{1,5}/g;
 const medium = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{5,}$/g;
-const lastLevel = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[$@$!%*?&])[A-Za-z$@$!%*?&]{6,}/g;
+const lastLevel = /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-.]).{6,}/g;
 
 class SignUp extends Component {
   constructor(props) {
@@ -185,8 +185,8 @@ class SignUp extends Component {
               helperText={
                 this.state.password === this.state.checkPassWord &&
                 this.state.checkPassWord.length > 0
-                  ? "Ok"
-                  : "Enter the same password"
+                  ? "Fine, keep going this way"
+                  : "For god sake enter the same password"
               }
               margin="normal"
             />
