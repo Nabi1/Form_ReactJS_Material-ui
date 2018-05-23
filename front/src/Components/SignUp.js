@@ -8,6 +8,7 @@ import SnackbarContent from '@material-ui/core/SnackbarContent';
 import ciri from '../Ciri.png';
 import witcher from '../theWitcher3.jpg';
 
+
 //VARIABLES
 let pwd = ""; //complexity pwd display
 let pwd2= ""; // match pwd function
@@ -62,6 +63,9 @@ submit(event) {
 //fin ajax
   console.log(JSON.stringify(this.state,1,1));
   alert('Formulaire envoyé!');
+
+  this.props.history.push('/')
+
 }
 
 // JSON + FLASH + PWD COMPLEXITY + DISPLAY ON CONDITION
@@ -136,6 +140,7 @@ submit(event) {
         action={action} />
         </Grid>
         </div> : null }
+
         </div> : null }
       </div>
     );
