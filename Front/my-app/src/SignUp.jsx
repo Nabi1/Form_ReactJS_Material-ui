@@ -1,4 +1,8 @@
 import React, {Component} from 'react';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import Icon from '@material-ui/core/Icon';
 
 class SignUp extends Component {
   constructor(props) {
@@ -9,7 +13,10 @@ class SignUp extends Component {
 			email: '',
       password: '',
       validatepassword: '',
-      flash: ''
+      flash: '',
+      open: false,
+      vertical: null,
+     horizontal: null,
     }
     
 	}
@@ -38,7 +45,13 @@ class SignUp extends Component {
       validatepassword: event.target.value
 		})
   }
+  handleClick = state => () => {
+    this.setState({ open: true, ...state });
+  };
 
+  handleClose = () => {
+    this.setState({ open: false });
+  };
   handleSubmit = (event) => {
     event.preventDefault();
     console.log(JSON.stringify(this.state,1,1));
@@ -57,27 +70,69 @@ class SignUp extends Component {
     )
   }
   render() {
+    const { vertical, horizontal, open } = this.state;
   	return(
       <div>
-        <h1>{JSON.stringify(this.state,1,1)}</h1>
+        <p>Sign Up !</p>
         <form onSubmit={this.handleSubmit}>
-          <p>Last Name</p>
-            <input onChange={this.updateLastnameField.bind(this)} type="text" name="lastname"/>
-          <br />
-          <p>First Name</p>
-            <input onChange={this.updateFirstnameField.bind(this)} type="text" name="firstname"/>
-          <br />
-          <p>Email</p>
-            <input onChange={this.updateEmailField.bind(this)} type="email" name="email"/>
-          <br />
-          <p>Password</p>
-            <input onChange={this.updatePasswordField.bind(this)} type="password" name="password"/>
-          <br />
-          <p>Validate Password</p>
-            <input onChange={this.updateValidatePasswordField.bind(this)} type="password" name="validatepassword"/>
-          <br />
-          <input type="submit" value="Submit"/>
-        </form>
+          <TextField
+          id="lastname"
+          label="Lastname"
+          value={this.state.name}
+          onChange={this.updateLastnameField.bind(this)}
+          margin="normal"
+        />
+        <br />
+        <TextField
+          id="name"
+          label="Firstname"
+          value={this.state.firstname}
+          onChange={this.updateFirstnameField.bind(this)}
+          margin="normal"
+        />
+        <br />
+        <TextField
+          id="email"
+          label="Email"
+          type="email"
+          value={this.state.email}
+          onChange={this.updateEmailField.bind(this)}
+          margin="normal"
+        />
+        <br />
+        <TextField
+          id="password"
+          label="Passeword"
+          type="password"
+          value={this.state.password}
+          onChange={this.updatePasswordField.bind(this)}
+          margin="normal"
+        />
+        <br />
+        <TextField
+          id="password"
+          label="Validate Password"
+          type="password"
+          value={this.state.validatepassword}
+          onChange={this.updateValidatePasswordField.bind(this)}
+          margin="normal"
+        />
+         <br />
+         <br />
+          <Button type="submit" onClick={this.handleClick({ vertical: 'top', horizontal: 'center' })} value="Submit" variant="raised" color="primary">
+        Submit   
+        <Icon>send</Icon>
+      </Button>
+      </form>
+      <Snackbar
+          anchorOrigin={{ vertical, horizontal }}
+          open={open}
+          onClose={this.handleClose}
+          ContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={<span id="message-id">{this.state.flash}</span>}
+        />
       </div>
 	  );
   }
