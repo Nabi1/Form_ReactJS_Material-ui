@@ -35,7 +35,7 @@ Ouvrir un nouveau terminal dans le dossier ./back (c.a.d le dossier ./back dans 
 
 Le server NodeJs est lancé, dans le terminal devrait être écrit "We're Listening on port 5001" et "Database is connected".
 
-Si tu remplis correctement tous les champs du formulaire, 2 actions vont avoir lieu : 
+Si j'ai bien travaillé et que tu remplis correctement tous les champs du formulaire, 2 actions vont avoir lieu : 
 
 1/ Un POST avec comme status 200 sera visible dans la console du back-end (sur la route /auth/signup), 
 
